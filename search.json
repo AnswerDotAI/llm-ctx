@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "llm_ctx",
+    "section": "",
+    "text": "Given an llms.txt file, this provides a CLI and Python API to parse the file and create an XML context file from it. The input file should follow this format:",
+    "crumbs": [
+      "llm_ctx"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "llm_ctx",
+    "section": "Install",
+    "text": "Install\npip install llm-ctx",
+    "crumbs": [
+      "llm_ctx"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "llm_ctx",
+    "section": "How to use",
+    "text": "How to use\nTo get help for the CLI:\nllms_txt2ctx -h\nTo convert an llms.txt file to XML context and save to llms.md:\nllms_txt2ctx llms.txt &gt; llms.md\nPass --optional False to skip the ‘optional’ section of the input file.",
+    "crumbs": [
+      "llm_ctx"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "llm_ctx",
+    "section": "",
+    "text": "We’ll use an llms.txt file for FastHTML for our examples.\n\npath = Path('llms.txt')\ntxt = path.read_text()\n\n\nsource\n\nparse_llm_txt\n\n parse_llm_txt (md)\n\nParse fasthtml markdown into structured dict\nThe returned dict contains the summary and title of the file…\n\nd = parse_llm_txt(txt)\nd.title, d.summary\n\n('FastHTML',\n 'FastHTML is a python library which brings together Starlette, Uvicorn, HTMX, and fastcore\\'s `FT` \"FastTags\" into a library for creating server-rendered hypermedia applications. The `FastHTML` class itself inherits from `Starlette`, and adds decorator-based routing with many additions, Beforeware, automatic `FT` to HTML rendering, and much more. Although parts of its API are inspired by FastAPI, it is *not* compatible with FastAPI syntax and is not targeted at creating API services. FastHTML includes support for Pico CSS and the fastlite sqlite library, although using both are optional; sqlite can be used directly or via the fastsql library, and any CSS framework can be used. FastHTML is compatible with web components and any vanilla JS library, but not with React, Vue, or Svelte. Support for the Surreal and css-scope-inline libraries are also included, but both are optional.')\n\n\n…along with each of the H2-defined sections.\n\nlist(d.sections)\n\n['Docs', 'Examples', 'Optional']\n\n\nEach section contains a list of URLs and optional extra info on each one.\n\nd.sections.Optional\n\n(#1) [{'title': 'Starlette documentation', 'url': 'https://gist.githubusercontent.com/jph00/809e4a4808d4510be0e3dc9565e9cbd3/raw/9b717589ca44cedc8aaf00b2b8cacef922964c0f/starlette-sml.md', 'info': 'A subset of the Starlette documentation useful for FastHTML development'}]\n\n\n\nsource\n\n\nDoc\n\n Doc (url, **kw)\n\nCreate a Doc FT object with the text retrieved from url as the child, and kw as attrs.\n\nsource\n\n\nSection\n\n Section (nm, items)\n\nCreate a Section FT object containing a Doc object for each child.\n\nsource\n\n\nmk_ctx\n\n mk_ctx (d, optional=True)\n\nCreate a Project with a Section for each H2 part in d, optionally skipping the ‘optional’ section.\n\nctx = mk_ctx(d)\n\n\nd0 = ctx.children[0].children[2]\nd0.title,d0.info\n\n('FastHTML quick start', 'A brief overview of many FastHTML features')\n\n\n\nd0.children[0][:180]\n\n'# Web Devs Quickstart\\n\\n\\n\\n&lt;div&gt;\\n\\n&gt; **Note**\\n&gt;\\n&gt; We’re going to be adding more to this document, so check back\\n&gt; frequently for updates.\\n\\n&lt;/div&gt;\\n\\n## Installation\\n\\n``` bash\\npip instal'\n\n\n\nsource\n\n\nget_sizes\n\n get_sizes (ctx)\n\n\nget_sizes(ctx)\n\n{'docs': {'Surreal': 17720,\n  'CSS Scope Inline': 7836,\n  'FastHTML quick start': 19364,\n  'HTMX reference': 26427},\n 'examples': {'Todo list application': 18588, 'Websockets application': 693},\n 'optional': {'Starlette documentation': 48331}}\n\n\n\nPath('fasthtml.md').write_text(to_xml(ctx))\n\n151269\n\n\n\nsource\n\n\nllms_txt2ctx\n\n llms_txt2ctx (fname:str, optional:&lt;function bool_arg&gt;=True)\n\nPrint a Project with a Section for each H2 part in file read from fname, optionally skipping the ‘optional’ section..\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nfname\nstr\n\nFile name to read\n\n\noptional\nbool_arg\nTrue\nSkip ‘optional’ section?\n\n\n\n\nfrom contextlib import redirect_stdout\n\n\nwith open('fasthtml-noopt.md', 'w') as f:\n    with redirect_stdout(f): llms_txt2ctx.__wrapped__('llms.txt', optional=False)",
+    "crumbs": [
+      "llm_ctx"
+    ]
+  }
+]

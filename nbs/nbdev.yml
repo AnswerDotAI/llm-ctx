@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "llm_ctx"
+  site-url: "https://AnswerDotAI.github.io/llm_ctx"
+  description: "Create an LLM XML context document from an llms.txt file"
+  repo-branch: main
+  repo-url: "https://github.com/AnswerDotAI/llm_ctx"

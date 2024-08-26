@@ -1,4 +1,4 @@
-*.md
+fast*.md
 posts/
 .quarto
 .sesskey

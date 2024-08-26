@@ -59,7 +59,6 @@ def llms_txt2ctx(
     optional:bool_arg=True # Skip 'optional' section?
 ):
     "Print a `Project` with a `Section` for each H2 part in file read from `fname`, optionally skipping the 'optional' section.."
-    skip = '' if optional else 'Optional'
-    sections = [Section(k, v) for k,v in d.sections.items() if k!=skip]
-    ctx = Project(title=d.title, summary=d.summary)(*sections)
+    d = parse_llm_txt(Path(fname).read_text())
+    ctx = mk_ctx(d, optional=optional)
     print(to_xml(ctx))
